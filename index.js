@@ -45,12 +45,12 @@ CmdTrigger.prototype.getServices = function() {
 
 
 CmdTrigger.prototype._setOn = function(on, callback) {
- this.log("Setting '" + this.name + "' " + on);
+if(debug){ this.log("Setting '" + this.name + "' " + on); }
   if (on && !this.stateful) {
     if (!this.execAfterDelay) {
       //Execute command from config file and turn switch off again after configured delay
-      this.log("Executing command: '" + this.command + "'");
       if(debug){
+	this.log("Executing command: '" + this.command + "'");      
         exec(this.command, (err, stdout, stderr) => {
             if (err) {
                 this.log(err);
@@ -68,8 +68,8 @@ CmdTrigger.prototype._setOn = function(on, callback) {
     else{
       //Execute command after configured delay and turn switch off again
       setTimeout(function() {
-        this.log("Executing command: '" + this.command + "'");
         if(debug){
+	    this.log("Executing command: '" + this.command + "'");
             exec(this.command, (err, stdout, stderr) => {
                 if (err) {
                     this.log(err);
